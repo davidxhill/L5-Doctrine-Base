@@ -1,0 +1,21 @@
+App\Users\User:
+  type: entity
+  table: users
+  id:
+    id:
+      type: string
+      length: 36
+  fields:
+    first_name:
+      type: string
+      length: 50
+    last_name:
+      type: string
+      length: 50
+    email:
+        type: string
+        unique: true
+    password:
+        type: string
+    token:
+        type: string
