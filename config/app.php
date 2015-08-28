@@ -143,7 +143,8 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Atrauzzi\LaravelDoctrine\ServiceProvider::class,
+        //Atrauzzi\LaravelDoctrine\ServiceProvider::class,
+        LaravelDoctrine\ORM\DoctrineServiceProvider::class,
 
     ],
 

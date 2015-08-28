@@ -1,11 +1,13 @@
 <?php
-
 namespace App\Users;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
+use LaravelDoctrine\ORM\Auth\Authenticatable;
+use LaravelDoctrine\ORM\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Emails\Email;
+use App\Passwords\HashedPassword;
+use Rhumsaa\Uuid\Uuid;
 
 /**
  * User
@@ -18,6 +20,11 @@ class User implements AuthenticatableContract, CanResetPasswordContract
      * @var string
      */
     private $id;
+
+    /**
+     * @var string
+     */
+    private $user_name;
 
     /**
      * @var string
@@ -37,16 +44,29 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     /**
      * @var string
      */
-    private $password;
-
-    /**
-     * @var string
-     */
     private $token;
 
-    public function __construct()
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $deletedAt;
+
+    public function __construct($name, Email $email, HashedPassword $password)
     {
-        return;
+        $this->setId(Uuid::uuid4());
+        $this->setUserName($name);
+        $this->setEmail($email);
+        $this->setPassword($password);
     }
 
     /**
@@ -56,7 +76,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
      *
      * @return User
      */
-    public function setId($id)
+    public function setId(Uuid $id)
     {
         $this->id = $id;
 
@@ -128,7 +148,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
      *
      * @return User
      */
-    public function setEmail($email)
+    public function setEmail(Email $email)
     {
         $this->email = $email;
 
@@ -152,11 +172,9 @@ class User implements AuthenticatableContract, CanResetPasswordContract
      *
      * @return User
      */
-    public function setPassword($password)
+    private function setPassword(HashedPassword $password)
     {
         $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -191,5 +209,94 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     public function getToken()
     {
         return $this->token;
+    }
+
+
+    /**
+     * Set userName
+     *
+     * @param string $userName
+     *
+     * @return User
+     */
+    public function setUserName($userName)
+    {
+        $this->user_name = $userName;
+
+        return $this;
+    }
+
+    /**
+     * Get userName
+     *
+     * @return string
+     */
+    public function getUserName()
+    {
+        return $this->user_name;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @return User
+     */
+    public function setRegisterTime()
+    {
+        $date = new \DateTime;
+        $this->updated_at = $date;
+        $this->created_at = $date;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @return User
+     */
+    public function updateModifiedTime()
+    {
+        $this->updated_at = new \DateTime;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set deletedAt
+     *
+     * @param \DateTime $deletedAt
+     *
+     * @return User
+     */
+    public function delete()
+    {
+        $this->deleted_at = new \DateTime;
+    }
+
+    /**
+     * Get deletedAt
+     *
+     * @return \DateTime
+     */
+    public function getDeletedAt()
+    {
+        return $this->deleted_at;
     }
 }

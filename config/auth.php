@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => 'doctrine.auth',
+    'driver' => 'doctrine',
 
     /*
     |--------------------------------------------------------------------------
@@ -63,5 +63,4 @@ return [
         'table' => 'password_resets',
         'expire' => 60,
     ],
-
 ];

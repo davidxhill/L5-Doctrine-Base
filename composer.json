@@ -4,13 +4,17 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/davidxhill/orm.git"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
-        "atrauzzi/laravel-doctrine": "dev-master",
+        "laravel-doctrine/orm": "dev-master",
         "laravel/framework": "5.1.*",
-        "doctrine/orm": ">=2.4.0",
-        "doctrine/migrations": "dev-master#46a031ddaea47d0685200027cfe8c83b02aee6f6",
-        "beberlei/DoctrineExtensions": "1.0.*@dev"
+        "ramsey/uuid": "2.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,6 +55,6 @@
     },
     "config": {
         "minimum-stability": "dev",
-        "prefer-stable": true
+        "bin-dir": "bin"
     }
 }
