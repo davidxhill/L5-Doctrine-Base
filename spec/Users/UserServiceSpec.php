@@ -19,6 +19,6 @@ class UserServiceSpec extends ObjectBehavior
             'password' => 'ValidPassword3!'
         ];
 
-        $this->register($data)->shouldReturnAnInstanceOf('App\Users\User');
+        $user = $this->register($data)->shouldReturnAnInstanceOf('App\Users\User');
     }
 }

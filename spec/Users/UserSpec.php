@@ -10,7 +10,11 @@ class UserSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('username', new Email('steve@example.com'), new HashedPassword('ValidPassword3!'));
+        $this->beConstructedWith(
+            'username',
+            new Email('steve@example.com'),
+            new HashedPassword('ValidPassword3!')
+        );
     }
 
     function it_is_initializable()

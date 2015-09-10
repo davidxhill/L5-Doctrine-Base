@@ -6,6 +6,13 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+        /**
+     * @var array
+     */
+    protected $contractArray = [
+        'App\Users\Repositories\UserRepository' => 'App\Users\Repositories\DoctrineUser',
+    ];
+
     /**
      * Bootstrap any application services.
      *
@@ -13,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->bindContracts($this->contractArray);
     }
 
     /**
@@ -24,5 +31,15 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    /**
+     * @param $array
+     */
+    public function bindContracts($array)
+    {
+        foreach ($array as $contract => $class) {
+            $this->app->bind($contract, $class);
+        }
     }
 }
