@@ -19,7 +19,7 @@ class HashedPasswordSpec extends ObjectBehavior
 
     function it_hashes_password_on_creation()
     {
-        $this->toString()->shouldHaveMinLenth(36);
+        $this->__toString()->shouldHaveMinLenth(36);
     }
 
     function it_throws_exeception_if_validation_fails()

@@ -3,9 +3,15 @@ namespace spec\App\Users;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use App\Users\Repositories\UserRepository;
 
 class UserServiceSpec extends ObjectBehavior
 {
+    function let(UserRepository $userRepo)
+    {
+        $this->beConstructedWith($userRepo);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('App\Users\UserService');
