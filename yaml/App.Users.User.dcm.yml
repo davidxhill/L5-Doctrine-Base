@@ -9,29 +9,33 @@ App\Users\User:
         first_name:
             type: string
             length: 50
+            nullable: true
         last_name:
             type: string
             length: 50
+            nullable: true
         email:
-                type: string
-                unique: true
+            type: string
+            unique: true
         password:
-                type: string
+            type: string
         token:
-                type: string
+            type: string
+            nullable: true
         user_name:
             type: string
             length: 50
             unique: true
-        createdAt:
+        created_at:
             type: datetime
             column: created_at
-        updatedAt:
+        updated_at:
             type: datetime
             column: updated_at
-        deletedAt:
+        deleted_at:
             type: datetime
             column: deleted_at
+            nullable: true
     lifecycleCallbacks:
         prePersist: [setRegisterTime]
         preUpdate: [updateModifiedTime]

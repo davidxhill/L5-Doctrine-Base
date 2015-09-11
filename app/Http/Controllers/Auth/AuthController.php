@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Passwords\Exceptions\FailedPasswordValidationException;
 use App\Users\User;
 use App\Users\UserService;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -24,13 +26,16 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    public $user;
+
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserService $user)
     {
+        $this->user = $user;
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -46,6 +51,31 @@ class AuthController extends Controller
         }
 
         return view('auth.login');
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        try {
+            $validator = $this->validator($request->all());
+
+            if ($validator->fails()) {
+                $this->throwValidationException(
+                    $request, $validator
+                );
+            }
+
+            \Auth::login($this->create($request->all()));
+
+            return redirect($this->redirectPath());
+        } catch (FailedPasswordValidationException $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -69,8 +99,8 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(UserService $user, array $data)
+    protected function create(array $data)
     {
-        return $userService->register($data);
+        return $this->user->register($data);
     }
 }

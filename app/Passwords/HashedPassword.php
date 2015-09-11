@@ -44,7 +44,7 @@ class HashedPassword
         return levenshtein(strtolower($newPassword), strtolower($oldPassword));
     }
 
-    public function toString()
+    public function __toString()
     {
         return $this->hash;
     }

@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function () {
-    //Auth::check();
     return view('welcome');
+});
+
+Route::get('home', function () {
+    return redirect('/');
 });
 
 // Authentication routes...

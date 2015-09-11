@@ -3,6 +3,7 @@ namespace App\Users\Repositories;
 
 use App\Users\User;
 use App\Repositories\DoctrineRepository;
+use Doctrine\ORM\EntityManagerInterface as EntityManager;
 
 class DoctrineUser extends DoctrineRepository implements UserRepository
 {

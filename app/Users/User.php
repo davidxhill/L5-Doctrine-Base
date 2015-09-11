@@ -49,17 +49,17 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     /**
      * @var \DateTime
      */
-    private $createdAt;
+    private $created_at;
 
     /**
      * @var \DateTime
      */
-    private $updatedAt;
+    private $updated_at;
 
     /**
      * @var \DateTime
      */
-    private $deletedAt;
+    private $deleted_at;
 
     public function __construct($name, Email $email, HashedPassword $password)
     {
@@ -237,7 +237,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Set createdAt
+     * Set created_at
      *
      * @return User
      */
@@ -249,7 +249,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Get createdAt
+     * Get created_at
      *
      * @return \DateTime
      */
@@ -259,7 +259,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Set updatedAt
+     * Set updated_at
      *
      * @return User
      */
@@ -269,7 +269,7 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Get updatedAt
+     * Get updated_at
      *
      * @return \DateTime
      */
@@ -279,9 +279,9 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Set deletedAt
+     * Set deleted_at
      *
-     * @param \DateTime $deletedAt
+     * @param \DateTime $deleted_at
      *
      * @return User
      */
@@ -291,12 +291,54 @@ class User implements AuthenticatableContract, CanResetPasswordContract
     }
 
     /**
-     * Get deletedAt
+     * Get deleted_at
      *
      * @return \DateTime
      */
     public function getDeletedAt()
     {
         return $this->deleted_at;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $created_at
+     *
+     * @return User
+     */
+    public function setCreatedAt($created_at)
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updated_at
+     *
+     * @return User
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Set deleted_at
+     *
+     * @param \DateTime $deleted_at
+     *
+     * @return User
+     */
+    public function setDeletedAt($deleted_at)
+    {
+        $this->deleted_at = $deleted_at;
+
+        return $this;
     }
 }
